@@ -16,3 +16,8 @@ City::City(const char *cityName) {
 City::~City() {
     delete[] city;
 }
+// Оператор вывода узла в поток
+std::ostream &operator<<(std::ostream &os, const City &city) {
+    os << city.city << " ";
+    return os;
+}

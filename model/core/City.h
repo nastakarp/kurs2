@@ -16,6 +16,7 @@ struct City {
 
     // Деструктор
     ~City();
+    friend std::ostream &operator<<(std::ostream &os, const City &city);
 };
 
 

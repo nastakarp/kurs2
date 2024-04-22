@@ -8,10 +8,10 @@
 #include <iostream>
 
 struct Position {
-    const char* position;
+    const char *position;
 
     // Конструктор
-    Position(const char* playerPosition);
+    Position(const char *playerPosition);
 
     // Деструктор
     ~Position();

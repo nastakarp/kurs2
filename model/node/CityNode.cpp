@@ -19,6 +19,6 @@ bool operator==(const CityNode &lhs, const CityNode &rhs) {
 
 // Вывод узла в поток
 std::ostream &operator<<(std::ostream &os, const CityNode &node) {
-    os <<node.data.city;
+    os << node.data.city;
     return os;
 }

@@ -5,7 +5,7 @@
 #include "Position.h"
 
 // Определение конструктора
-Position::Position(const char* playerPosition) : position(playerPosition) {}
+Position::Position(const char *playerPosition) : position(playerPosition) {}
 
 // Определение деструктора
 Position::~Position() {

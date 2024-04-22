@@ -11,8 +11,8 @@ using namespace std;
 
 // Определение класса для списка узлов
 struct NameList {
-    NameNode* head{}; // Указатель на начало списка
-    NameNode* tail{}; // Указатель на конец списка
+    NameNode *head{}; // Указатель на начало списка
+    NameNode *tail{}; // Указатель на конец списка
     // Конструктор по умолчанию
     NameList();
 
@@ -23,7 +23,7 @@ struct NameList {
     void appendNode(const Name value);
 
     // Вывод StringList в поток
-    friend std::ostream& operator<<(std::ostream& os, const NameList& node);
+    friend std::ostream &operator<<(std::ostream &os, const NameList &node);
 };
 
 #endif //PROGA_KURS_NAMELIST_H

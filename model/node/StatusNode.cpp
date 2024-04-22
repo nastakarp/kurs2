@@ -18,6 +18,6 @@ bool operator==(const StatusNode &lhs, const StatusNode &rhs) {
 
 // Вывод узла в поток
 std::ostream &operator<<(std::ostream &os, const StatusNode &node) {
-    os <<node.data.status;
+    os << node.data.status;
     return os;
 }

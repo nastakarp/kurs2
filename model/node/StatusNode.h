@@ -10,7 +10,7 @@
 
 struct StatusNode {
     Status data; // Данные узла
-    StatusNode* next; // Указатель на следующий узел
+    StatusNode *next; // Указатель на следующий узел
     // Конструктор для инициализации узла с заданным значением и указателем на следующий узел
     StatusNode(const Status value);
 
@@ -25,4 +25,5 @@ struct StatusNode {
 
 
 };
+
 #endif //PROGA_KURS_STATUSNODE_H

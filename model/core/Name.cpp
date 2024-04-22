@@ -6,7 +6,7 @@
 #include "Name.h"
 
 // Конструктор
-Name::Name(const char* last, const char* first, const char* patr) {
+Name::Name(const char *last, const char *first, const char *patr) {
     int len = length(last);
     lastName = new char[len + 1];
     copy(last, lastName, len);
@@ -26,8 +26,9 @@ Name::~Name() {
     delete[] firstName;
     delete[] patronymic;
 }
+
 // Оператор вывода узла в поток
-std::ostream& operator<<(std::ostream& os, const Name& name) {
-    os << name.firstName << " "<<name.lastName<<" "<<name.patronymic<<" ";
+std::ostream &operator<<(std::ostream &os, const Name &name) {
+    os << name.firstName << " " << name.lastName << " " << name.patronymic << " ";
     return os;
 }

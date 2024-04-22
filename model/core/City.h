@@ -9,10 +9,10 @@
 #include <iostream>
 
 struct City {
-    char* city;
+    char *city;
 
     // Конструктор
-    City(const char* cityName);
+    City(const char *cityName);
 
     // Деструктор
     ~City();

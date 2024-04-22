@@ -10,10 +10,10 @@ NameList::NameList() : head(nullptr), tail(nullptr) {
 
 // Деструктор для освобождения памяти
 NameList::~NameList() {
-    NameNode* current = head; // Указатель на текущий узел
+    NameNode *current = head; // Указатель на текущий узел
 
     while (current != nullptr) {
-        NameNode* next = current->next; // Сохраняем указатель на следующий узел
+        NameNode *next = current->next; // Сохраняем указатель на следующий узел
         delete current; // Освобождаем память для текущего узла
         current = next; // Переходим к следующему узлу
     }
@@ -25,7 +25,7 @@ NameList::~NameList() {
 // Добавление узла в конец списка
 void NameList::appendNode(const Name value) {
     // Создаем новый узел с заданным значением
-    auto* newNode = new NameNode(value);
+    auto *newNode = new NameNode(value);
 
     // Если список пуст, устанавливаем новый узел как начало и конец списка
     if (head == nullptr) {
@@ -39,8 +39,8 @@ void NameList::appendNode(const Name value) {
 }
 
 // Оператор вывода узла в поток
-std::ostream& operator<<(std::ostream& os, const NameList& list) {
-    NameNode* current = list.head;
+std::ostream &operator<<(std::ostream &os, const NameList &list) {
+    NameNode *current = list.head;
     while (current != nullptr) {
         os << current->data << " -> ";
         current = current->next;

@@ -4,8 +4,9 @@
 #include <iostream>
 #include "Status.h"
 #include "../../Util.h"
+
 // Определение конструктора
-Status::Status(const char* playerStatus) {
+Status::Status(const char *playerStatus) {
     int len = length(playerStatus);
     status = new char[len + 1];
     copy(playerStatus, status, len);

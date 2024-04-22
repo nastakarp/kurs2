@@ -4,6 +4,7 @@
 #include <iostream>
 #include "TeamName.h"
 #include "../../Util.h"
+
 // Конструктор
 TeamName::TeamName(const char *cmd) {
     int len = length(cmd);

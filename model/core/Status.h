@@ -4,13 +4,15 @@
 
 #ifndef PROGA_KURS_STATUS_H
 #define PROGA_KURS_STATUS_H
+
 struct Status {
-    char* status;
+    char *status;
 
     // Конструктор
-    Status(const char* playerStatus);
+    Status(const char *playerStatus);
 
     // Деструктор
     ~Status();
 };
+
 #endif //PROGA_KURS_STATUS_H

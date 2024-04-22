@@ -6,7 +6,7 @@
 #include "model/core/TeamName.h"
 
 int main() {
-    setlocale (LC_ALL,"Russian");
+    setlocale(LC_ALL, "Russian");
 
     // Создание экземпляра структуры Player с использованием конструктора
     Name person("Karpenko", "Anastasia ", "Yuryevna");
@@ -23,16 +23,16 @@ int main() {
     std::cout << "city: " << city.city << std::endl;
 
     // Создание экземпляров структуры Player с использованием конструктора
-    Position player( "Torwart");
+    Position player("Torwart");
 
     // Вывод на экран позиций игроков
-    std::cout << "position: "<< player.position << std::endl;
+    std::cout << "position: " << player.position << std::endl;
 
     // Создание экземпляров структуры PlayerStatus с использованием конструктора
     Status status("candidate");
 
     // Вывод на экран статусов игроков
-    std::cout << "status: "<< status.status << std::endl;
+    std::cout << "status: " << status.status << std::endl;
 
     // Создание экземпляра структуры Command с использованием конструктора
     TeamName cmd("FK Saratov");

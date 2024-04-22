@@ -9,7 +9,7 @@
 
 struct TeamNameNode {
     TeamName data;
-    TeamNameNode* next;
+    TeamNameNode *next;
 
     // Конструктор для инициализации узла с заданным значением и указателем на следующий узел
     TeamNameNode(const TeamName value);

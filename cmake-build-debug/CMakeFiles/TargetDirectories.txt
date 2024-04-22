@@ -1,3 +1,3 @@
-C:/Users/Анастасия/CLionProjects/kurs2/cmake-build-debug/CMakeFiles/kurs2.dir
+C:/Users/Анастасия/CLionProjects/kurs2/cmake-build-debug/CMakeFiles/proga_kurs.dir
 C:/Users/Анастасия/CLionProjects/kurs2/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/Анастасия/CLionProjects/kurs2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

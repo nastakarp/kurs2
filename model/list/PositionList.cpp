@@ -1,19 +1,20 @@
 //
 // Created by Анастасия on 23.04.2024.
 //
-#include "CityList.h"
-#include "../node/CityNode.h"
 
-CityList::CityList() : head(nullptr), tail(nullptr) {
+#include "PositionList.h"
+#include "../node/PositionNode.h"
+
+PositionList::PositionList() : head(nullptr), tail(nullptr) {
 }
 
 
 // Деструктор для освобождения памяти
-CityList::~CityList() {
-    CityNode *current = head; // Указатель на текущий узел
+PositionList::~PositionList() {
+    PositionNode *current = head; // Указатель на текущий узел
 
     while (current != nullptr) {
-        CityNode *next = current->next; // Сохраняем указатель на следующий узел
+        PositionNode *next = current->next; // Сохраняем указатель на следующий узел
         delete current; // Освобождаем память для текущего узла
         current = next; // Переходим к следующему узлу
     }
@@ -23,9 +24,9 @@ CityList::~CityList() {
 }
 
 // Добавление узла в конец списка
-void CityList::appendNode(const City value) {
+void PositionList::appendNode(const Position value) {
     // Создаем новый узел с заданным значением
-    auto *newNode = new CityNode(value);
+    auto *newNode = new PositionNode(value);
 
     // Если список пуст, устанавливаем новый узел как начало и конец списка
     if (head == nullptr) {
@@ -39,8 +40,8 @@ void CityList::appendNode(const City value) {
 }
 
 // Оператор вывода узла в поток
-std::ostream &operator<<(std::ostream &os, const CityList &list) {
-    CityNode *current = list.head;
+std::ostream &operator<<(std::ostream &os, const PositionList &list) {
+    PositionNode *current = list.head;
     while (current != nullptr) {
         os << current->data << " -> ";
         current = current->next;

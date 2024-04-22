@@ -17,4 +17,8 @@ Status::~Status() {
     delete[] status; // Освобождение памяти, выделенной для статуса
 }
 
+std::ostream &operator<<(std::ostream &os, const Status &status) {
+    os << status.status << " ";
+    return os;
+}
 

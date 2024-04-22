@@ -16,3 +16,8 @@ TeamName::TeamName(const char *cmd) {
 TeamName::~TeamName() {
     delete[]name;
 }
+
+std::ostream &operator<<(std::ostream &os, const TeamName &name) {
+    os << name.name << " ";
+    return os;
+}

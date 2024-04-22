@@ -1,19 +1,20 @@
 //
 // Created by Анастасия on 23.04.2024.
 //
-#include "CityList.h"
-#include "../node/CityNode.h"
 
-CityList::CityList() : head(nullptr), tail(nullptr) {
+#include "TeamNameList.h"
+#include "../node/TeamNameNode.h"
+
+TeamNameList::TeamNameList() : head(nullptr), tail(nullptr) {
 }
 
 
 // Деструктор для освобождения памяти
-CityList::~CityList() {
-    CityNode *current = head; // Указатель на текущий узел
+TeamNameList::~TeamNameList() {
+    TeamNameNode *current = head; // Указатель на текущий узел
 
     while (current != nullptr) {
-        CityNode *next = current->next; // Сохраняем указатель на следующий узел
+        TeamNameNode *next = current->next; // Сохраняем указатель на следующий узел
         delete current; // Освобождаем память для текущего узла
         current = next; // Переходим к следующему узлу
     }
@@ -23,9 +24,9 @@ CityList::~CityList() {
 }
 
 // Добавление узла в конец списка
-void CityList::appendNode(const City value) {
+void TeamNameList::appendNode(const TeamName value) {
     // Создаем новый узел с заданным значением
-    auto *newNode = new CityNode(value);
+    auto *newNode = new TeamNameNode(value);
 
     // Если список пуст, устанавливаем новый узел как начало и конец списка
     if (head == nullptr) {
@@ -39,8 +40,8 @@ void CityList::appendNode(const City value) {
 }
 
 // Оператор вывода узла в поток
-std::ostream &operator<<(std::ostream &os, const CityList &list) {
-    CityNode *current = list.head;
+std::ostream &operator<<(std::ostream &os, const TeamNameList &list) {
+    TeamNameNode *current = list.head;
     while (current != nullptr) {
         os << current->data << " -> ";
         current = current->next;

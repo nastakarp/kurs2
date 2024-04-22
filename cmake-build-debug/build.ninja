@@ -133,6 +133,24 @@ build CMakeFiles/proga_kurs.dir/model/list/CityList.cpp.obj: CXX_COMPILER__proga
   OBJECT_DIR = CMakeFiles\proga_kurs.dir
   OBJECT_FILE_DIR = CMakeFiles\proga_kurs.dir\model\list
 
+build CMakeFiles/proga_kurs.dir/model/list/PositionList.cpp.obj: CXX_COMPILER__proga_kurs_unscanned_Debug C$:/Users/Анастасия/CLionProjects/kurs2/model/list/PositionList.cpp || cmake_object_order_depends_target_proga_kurs
+  DEP_FILE = CMakeFiles\proga_kurs.dir\model\list\PositionList.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\proga_kurs.dir
+  OBJECT_FILE_DIR = CMakeFiles\proga_kurs.dir\model\list
+
+build CMakeFiles/proga_kurs.dir/model/list/StatusList.cpp.obj: CXX_COMPILER__proga_kurs_unscanned_Debug C$:/Users/Анастасия/CLionProjects/kurs2/model/list/StatusList.cpp || cmake_object_order_depends_target_proga_kurs
+  DEP_FILE = CMakeFiles\proga_kurs.dir\model\list\StatusList.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\proga_kurs.dir
+  OBJECT_FILE_DIR = CMakeFiles\proga_kurs.dir\model\list
+
+build CMakeFiles/proga_kurs.dir/model/list/TeamNameList.cpp.obj: CXX_COMPILER__proga_kurs_unscanned_Debug C$:/Users/Анастасия/CLionProjects/kurs2/model/list/TeamNameList.cpp || cmake_object_order_depends_target_proga_kurs
+  DEP_FILE = CMakeFiles\proga_kurs.dir\model\list\TeamNameList.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\proga_kurs.dir
+  OBJECT_FILE_DIR = CMakeFiles\proga_kurs.dir\model\list
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target proga_kurs
@@ -141,7 +159,7 @@ build CMakeFiles/proga_kurs.dir/model/list/CityList.cpp.obj: CXX_COMPILER__proga
 #############################################
 # Link the executable proga_kurs.exe
 
-build proga_kurs.exe: CXX_EXECUTABLE_LINKER__proga_kurs_Debug CMakeFiles/proga_kurs.dir/model/core/Name.cpp.obj CMakeFiles/proga_kurs.dir/Util.cpp.obj CMakeFiles/proga_kurs.dir/model/node/NameNode.cpp.obj CMakeFiles/proga_kurs.dir/model/core/City.cpp.obj CMakeFiles/proga_kurs.dir/main.cpp.obj CMakeFiles/proga_kurs.dir/model/node/CityNode.cpp.obj CMakeFiles/proga_kurs.dir/model/core/Position.cpp.obj CMakeFiles/proga_kurs.dir/model/node/PositionNode.cpp.obj CMakeFiles/proga_kurs.dir/model/core/Status.cpp.obj CMakeFiles/proga_kurs.dir/model/node/StatusNode.cpp.obj CMakeFiles/proga_kurs.dir/model/core/TeamName.cpp.obj CMakeFiles/proga_kurs.dir/model/node/TeamNameNode.cpp.obj CMakeFiles/proga_kurs.dir/model/list/NameList.cpp.obj CMakeFiles/proga_kurs.dir/model/list/CityList.cpp.obj
+build proga_kurs.exe: CXX_EXECUTABLE_LINKER__proga_kurs_Debug CMakeFiles/proga_kurs.dir/model/core/Name.cpp.obj CMakeFiles/proga_kurs.dir/Util.cpp.obj CMakeFiles/proga_kurs.dir/model/node/NameNode.cpp.obj CMakeFiles/proga_kurs.dir/model/core/City.cpp.obj CMakeFiles/proga_kurs.dir/main.cpp.obj CMakeFiles/proga_kurs.dir/model/node/CityNode.cpp.obj CMakeFiles/proga_kurs.dir/model/core/Position.cpp.obj CMakeFiles/proga_kurs.dir/model/node/PositionNode.cpp.obj CMakeFiles/proga_kurs.dir/model/core/Status.cpp.obj CMakeFiles/proga_kurs.dir/model/node/StatusNode.cpp.obj CMakeFiles/proga_kurs.dir/model/core/TeamName.cpp.obj CMakeFiles/proga_kurs.dir/model/node/TeamNameNode.cpp.obj CMakeFiles/proga_kurs.dir/model/list/NameList.cpp.obj CMakeFiles/proga_kurs.dir/model/list/CityList.cpp.obj CMakeFiles/proga_kurs.dir/model/list/PositionList.cpp.obj CMakeFiles/proga_kurs.dir/model/list/StatusList.cpp.obj CMakeFiles/proga_kurs.dir/model/list/TeamNameList.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\proga_kurs.dir

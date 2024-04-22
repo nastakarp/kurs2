@@ -15,6 +15,8 @@ struct Position {
 
     // Деструктор
     ~Position();
+
+    friend std::ostream &operator<<(std::ostream &os, const Position &position);
 };
 
 #endif //PROGA_KURS_POSITION_H

@@ -12,3 +12,8 @@ Position::~Position() {
     // Здесь не требуется дополнительных действий для деструктора
 }
 
+// Оператор вывода узла в поток
+std::ostream &operator<<(std::ostream &os, const Position &position) {
+    os << position.position << " ";
+    return os;
+}

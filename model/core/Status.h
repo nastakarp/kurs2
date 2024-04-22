@@ -13,6 +13,8 @@ struct Status {
 
     // Деструктор
     ~Status();
+
+    friend std::ostream &operator<<(std::ostream &os, const Status &status);
 };
 
 #endif //PROGA_KURS_STATUS_H

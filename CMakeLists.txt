@@ -30,4 +30,10 @@ add_executable(proga_kurs
         model/list/NameList.h
         model/list/NameList.cpp
         model/list/CityList.h
-        model/list/CityList.cpp)
+        model/list/CityList.cpp
+        model/list/PositionList.cpp
+        model/list/PositionList.h
+        model/list/StatusList.cpp
+        model/list/StatusList.h
+        model/list/TeamNameList.cpp
+        model/list/TeamNameList.h)

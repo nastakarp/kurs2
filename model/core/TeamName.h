@@ -16,6 +16,8 @@ struct TeamName {
 
     // Деструктор
     ~TeamName();
+
+    friend std::ostream &operator<<(std::ostream &os, const TeamName &name);
 };
 
 

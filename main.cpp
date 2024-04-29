@@ -9,13 +9,16 @@ int main() {
     setlocale(LC_ALL, "Russian");
 
     // Создание экземпляра структуры Player с использованием конструктора
-    Name person("Karpenko", "Anastasia ", "Yuryevna");
+    Name person("Karpenko", "Anastasia ", "Yuryevna", "2005-09-20");
 
     // Вывод на экран
     std::cout << "surname: " << person.lastName << std::endl;
     std::cout << "name: " << person.firstName << std::endl;
     std::cout << "patronymic: " << person.patronymic << std::endl;
+    std::cout << "dateOfBirth: " << person.dateOfBirth << std::endl;
 
+    int yearOfBirth = extractYear(person.dateOfBirth);
+    std::cout << "Year of Birth: " << yearOfBirth << std::endl;
     // Создание экземпляра структуры City с использованием конструктора
     City city("Saratov");
 

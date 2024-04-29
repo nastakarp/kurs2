@@ -14,6 +14,7 @@ bool operator==(const NameNode &lhs, const NameNode &rhs) {
     return lhs.data.lastName == rhs.data.lastName &&
            lhs.data.firstName == rhs.data.firstName &&
            lhs.data.patronymic == rhs.data.patronymic;
+
 }
 
 // Вывод узла в поток

@@ -10,7 +10,7 @@
 
 struct Name {
     // Конструктор
-    Name(const char *last, const char *first, const char *patr);
+    Name(const char *last, const char *first, const char *patr, const char *dob);
 
     // Деструктор
     ~Name();
@@ -18,6 +18,7 @@ struct Name {
     char *lastName;
     char *firstName;
     char *patronymic;
+    char *dateOfBirth; // Дата рождения
 
     friend std::ostream &operator<<(std::ostream &os, const Name &name);
 };

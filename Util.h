@@ -8,5 +8,5 @@
 int length(const char *str);
 
 void copy(const char *source, char *destination, int len);
-
+int extractYear(const char* dateStr);
 #endif //PROGA_KURS_UTIL_H

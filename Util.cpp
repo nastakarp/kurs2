@@ -1,3 +1,6 @@
+#include <iostream>
+#include <fstream>
+
 // Функция для определения длины строки
 int length(const char *str) {
     int len = 0;
@@ -30,10 +33,29 @@ int extractYear(const char *dateStr) {
     }
     return year;
 }
+
 int strcmp(const char *str1, const char *str2) {
     while (*str1 && *str2 && *str1 == *str2) {
         ++str1;
         ++str2;
     }
     return *str1 - *str2;
+}
+
+char *readUntilComma(std::ifstream &input) {
+    const int bufferSize = 100; // Максимальная длина строки
+    char *buffer = new char[bufferSize];
+    int index = 0;
+    char symbol;
+
+    while (input.get(symbol) && symbol != EOF && symbol != ',' && symbol != '\n') {
+        buffer[index++] = symbol;
+        if (index >= bufferSize - 1) // Проверка на переполнение буфера
+            break;
+    }
+    if (symbol == ',') {
+        input.get(symbol);
+    }
+    buffer[index] = '\0'; // Добавляем завершающий нулевой символ
+    return buffer;
 }

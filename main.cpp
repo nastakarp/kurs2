@@ -1,47 +1,50 @@
 #include <iostream>
+#include <fstream>
 #include "model/core/Name.h"
 #include "model/core/City.h"
 #include "model/core/Position.h"
 #include "model/core/Status.h"
 #include "model/core/TeamName.h"
+#include "model/list/NameList.h"
+#include "model/list/CityList.h"
+#include "model/list/PositionList.h"
+#include "model/list/StatusList.h"
+#include "model/list/TeamNameList.h"
+
 
 int main() {
     setlocale(LC_ALL, "Russian");
+    ifstream input("player.txt", std::ios::in);
+    if (!input.is_open()) {
+        std::cerr << "Failed to open the file." << std::endl;
+        return 1;
+    }
+    NameList nameList;
+    CityList cityList;
+    PositionList positionList;
+    StatusList statusList;
+    TeamNameList teamNameList;
 
-    // Создание экземпляра структуры Player с использованием конструктора
-    Name person("Karpenko", "Anastasia ", "Yuryevna", "2005-09-20");
+    //функция для перевода id в int, добавить все в списки
+    while (!input.eof()) {
+        std::cout << readUntilComma(input) << " ";
+        NameList Name(readUntilComma(input));
+        nameList.appendNode(name);
+        CityList city(readUntilComma(input));
+        cityList.appendNode(city);
+        Position position(readUntilComma(input));
+        positionList.appendNode(position);
+        StatusList status(readUntilComma(input));
+        statusList.appendNode(status);
+        std::cout << std::endl;
+    }
+    std::cout << nameList.head->data;
+    std::cout << cityList.head->data;
+    std::cout << positionList.head->data;
+    std::cout << statusList.head->data;
 
-    // Вывод на экран
-    std::cout << "surname: " << person.lastName << std::endl;
-    std::cout << "name: " << person.firstName << std::endl;
-    std::cout << "patronymic: " << person.patronymic << std::endl;
-    std::cout << "dateOfBirth: " << person.dateOfBirth << std::endl;
 
-    int yearOfBirth = extractYear(person.dateOfBirth);
-    std::cout << "Year of Birth: " << yearOfBirth << std::endl;
-    // Создание экземпляра структуры City с использованием конструктора
-    City city("Saratov");
-
-    // Вывод на экран
-    std::cout << "city: " << city.city << std::endl;
-
-    // Создание экземпляров структуры Player с использованием конструктора
-    Position player("Torwart");
-
-    // Вывод на экран позиций игроков
-    std::cout << "position: " << player.position << std::endl;
-
-    // Создание экземпляров структуры PlayerStatus с использованием конструктора
-    Status status("candidate");
-
-    // Вывод на экран статусов игроков
-    std::cout << "status: " << status.status << std::endl;
-
-    // Создание экземпляра структуры Command с использованием конструктора
-    TeamName cmd("FK Saratov");
-
-    // Вывод на экран
-    std::cout << "team: " << cmd.name << std::endl;
+    input.close();
 
     return 0;
 }

@@ -16,7 +16,10 @@ struct City {
 
     // Деструктор
     ~City();
+
     friend std::ostream &operator<<(std::ostream &os, const City &city);
+
+    friend bool operator==(const City &city1, const City &city2);
 };
 
 

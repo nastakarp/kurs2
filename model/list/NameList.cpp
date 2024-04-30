@@ -21,9 +21,19 @@ NameList::~NameList() {
     head = nullptr; // Устанавливаем указатель на начало списка в nullptr
     tail = nullptr; // Устанавливаем указатель на конец списка в nullptr
 }
-
+//сделать перегрузку и адд для остальных
 // Добавление узла в конец списка
 void NameList::appendNode(const Name value) {
+    // Проверяем, существует ли уже такое значение в списке
+    NameNode *current = head;
+    while (current != nullptr) {
+        if (current->data == value) {
+            // Значение уже присутствует в списке, поэтому выходим из функции
+            return;
+        }
+        current = current->next;
+    }
+
     // Создаем новый узел с заданным значением
     auto *newNode = new NameNode(value);
 
@@ -37,6 +47,7 @@ void NameList::appendNode(const Name value) {
         tail = newNode;
     }
 }
+
 
 // Оператор вывода узла в поток
 std::ostream &operator<<(std::ostream &os, const NameList &list) {

@@ -4,6 +4,7 @@
 #include <iostream>
 #include "../../Util.h"
 #include "Name.h"
+
 // Конструктор
 Name::Name(const char *last, const char *first, const char *patr, const char *dob) {
     int len = length(last);
@@ -35,4 +36,11 @@ Name::~Name() {
 std::ostream &operator<<(std::ostream &os, const Name &name) {
     os << name.firstName << " " << name.lastName << " " << name.patronymic << " " << name.dateOfBirth << " ";
     return os;
+}
+
+bool operator==(const Name &name1, const Name &name2) {
+    return strcmp(name1.lastName, name2.lastName) == 0 &&
+           strcmp(name1.firstName, name2.firstName) == 0 &&
+           strcmp(name1.patronymic, name2.patronymic) == 0 &&
+           strcmp(name1.dateOfBirth, name2.dateOfBirth) == 0;
 }

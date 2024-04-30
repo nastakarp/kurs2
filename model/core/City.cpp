@@ -21,3 +21,7 @@ std::ostream &operator<<(std::ostream &os, const City &city) {
     os << city.city << " ";
     return os;
 }
+
+bool operator==(const City &city1, const City &city2) {
+    return strcmp(city1.city, city2.city) == 0;
+}

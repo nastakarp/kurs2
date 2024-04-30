@@ -24,6 +24,16 @@ CityList::~CityList() {
 
 // Добавление узла в конец списка
 void CityList::appendNode(const City value) {
+    // Проверяем, существует ли уже такое значение в списке
+    CityNode *current = head;
+    while (current != nullptr) {
+        if (current->data == value) {
+            // Значение уже присутствует в списке, поэтому выходим из функции
+            return;
+        }
+        current = current->next;
+    }
+
     // Создаем новый узел с заданным значением
     auto *newNode = new CityNode(value);
 

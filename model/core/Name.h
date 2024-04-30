@@ -21,6 +21,8 @@ struct Name {
     char *dateOfBirth; // Дата рождения
 
     friend std::ostream &operator<<(std::ostream &os, const Name &name);
+
+    friend bool operator==(const Name &name1, const Name &name2);
 };
 
 #endif //PROGA_KURS_NAME_H

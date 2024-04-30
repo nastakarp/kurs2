@@ -8,7 +8,7 @@
 #include <iostream>
 
 struct Position {
-    const char *position;
+    char *position;
 
     // Конструктор
     Position(const char *playerPosition);
@@ -17,6 +17,8 @@ struct Position {
     ~Position();
 
     friend std::ostream &operator<<(std::ostream &os, const Position &position);
+
+    friend bool operator==(const Position &position1, const Position &position2);
 };
 
 #endif //PROGA_KURS_POSITION_H

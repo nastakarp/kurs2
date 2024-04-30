@@ -22,3 +22,7 @@ std::ostream &operator<<(std::ostream &os, const Status &status) {
     return os;
 }
 
+
+bool operator==(const Status &status1, const Status &status2) {
+    return strcmp(status1.status, status2.status) == 0;
+}

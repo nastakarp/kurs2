@@ -15,6 +15,8 @@ struct Status {
     ~Status();
 
     friend std::ostream &operator<<(std::ostream &os, const Status &status);
+
+    friend bool operator==(const Status &status1, const Status &status2);
 };
 
 #endif //PROGA_KURS_STATUS_H

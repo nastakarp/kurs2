@@ -21,3 +21,6 @@ std::ostream &operator<<(std::ostream &os, const TeamName &name) {
     os << name.name << " ";
     return os;
 }
+bool operator==(const TeamName &name1, const TeamName &name2) {
+    return strcmp(name1.name, name2.name) == 0;
+}

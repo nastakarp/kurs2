@@ -24,6 +24,14 @@ StatusList::~StatusList() {
 
 // Добавление узла в конец списка
 void StatusList::appendNode(const Status value) {
+    StatusNode *current = head;
+    while (current != nullptr) {
+        if (current->data == value) {
+            // Значение уже присутствует в списке, поэтому выходим из функции
+            return;
+        }
+        current = current->next;
+    }
     // Создаем новый узел с заданным значением
     auto *newNode = new StatusNode(value);
 

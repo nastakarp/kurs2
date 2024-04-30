@@ -18,6 +18,8 @@ struct TeamName {
     ~TeamName();
 
     friend std::ostream &operator<<(std::ostream &os, const TeamName &name);
+
+    friend bool operator==(const TeamName &name1, const TeamName &name2);
 };
 
 

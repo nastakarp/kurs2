@@ -11,14 +11,24 @@
 #include "Status.h"
 #include "../list/TeamStatList.h"
 
-struct Player{
-    Player(int id, const Name &playerName, const City &playerCity, Position playerPosition, Status playerStatus,
-           TeamStatList list);
+struct Player {
+
+    Player(int id, Name *playerName, City *playerCity, Position *playerPosition, Status *playerStatus);
 
     int idPlayer;
-    Name name;
-    City city;
-    Position position;
-    Status status;
+    Name *name;
+    City *city;
+    Position *position;
+    Status *status;
+    TeamStatList statList;
+
+    ~Player();
+
+    friend std::ostream &operator<<(std::ostream &os, const Player &player);
+
+    friend bool operator==(const Player &lhs, const Player &rhs);
+
 };
+
 #endif //PROGA_KURS_PLAYER_H
+

@@ -1,13 +1,29 @@
 #include "Player.h"
-#include "../list/TeamStatList.h"
 
-//
-// Created by Анастасия on 01.05.2024.
-//
-Player::Player(int id, const Name &playerName, const City &playerCity, Position playerPosition, Status playerStatus,
-               TeamStatList list) :
-        idPlayer(id),
-        name(playerName),
-        city(playerCity),
-        position(playerPosition),
-        status(playerStatus) {}
+#include "Player.h"
+
+Player::Player(int id, Name* playerName, City* playerCity, Position* playerPosition, Status* playerStatus)
+        : idPlayer(id), name(playerName), city(playerCity), position(playerPosition), status(playerStatus) {}
+
+Player::~Player() {
+    // Освобождаем ресурсы, если это необходимо
+    delete name;
+    delete city;
+    delete position;
+    delete status;
+}
+
+std::ostream &operator<<(std::ostream &os, const Player &player) {
+    os << player.idPlayer << " ";
+    os << *(player.name) << " ";
+    os << *(player.city) << " ";
+    os << *(player.position) << " ";
+    os << *(player.status) << " ";
+    //os << player.statList;
+    return os;
+}
+
+bool operator==(const Player &lhs, const Player &rhs) {
+    // Сравниваем все поля структуры Player
+    return lhs.idPlayer == rhs.idPlayer;
+}

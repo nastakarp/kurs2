@@ -21,15 +21,15 @@ NameList::~NameList() {
     head = nullptr; // Устанавливаем указатель на начало списка в nullptr
     tail = nullptr; // Устанавливаем указатель на конец списка в nullptr
 }
-//сделать перегрузку и адд для остальных
+
 // Добавление узла в конец списка
-void NameList::appendNode(const Name value) {
+Name& NameList::appendNode(const Name& value) {
     // Проверяем, существует ли уже такое значение в списке
     NameNode *current = head;
     while (current != nullptr) {
         if (current->data == value) {
-            // Значение уже присутствует в списке, поэтому выходим из функции
-            return;
+            // Значение уже присутствует в списке, поэтому возвращаем ссылку на data
+            return current->data;
         }
         current = current->next;
     }
@@ -46,7 +46,11 @@ void NameList::appendNode(const Name value) {
         tail->next = newNode;
         tail = newNode;
     }
+
+    // Возвращаем ссылку на data нового узла
+    return newNode->data;
 }
+
 
 
 // Оператор вывода узла в поток

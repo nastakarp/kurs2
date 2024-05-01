@@ -19,7 +19,7 @@ struct CityList {
     ~CityList();
 
     // Добавление узла в конец списка
-    void appendNode(const City value);
+    City &appendNode(const City value);
 
     // Оператор вывода узла в поток
     friend std::ostream &operator<<(std::ostream &os, const CityList &list);

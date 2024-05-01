@@ -38,18 +38,19 @@ int main() {
         char *dob = readUntilComma(player_input);
         //std::cout<<fullname<<" " <<dob<<std::endl;
         Name name(fullname, dob);
-        nameList.appendNode(name);
+        Name &currentname = nameList.appendNode(name);
 
         City city(readUntilComma(player_input));
-        cityList.appendNode(city);
+        City &currentcity = cityList.appendNode(city);
 
         Position position(readUntilComma(player_input));
-        positionList.appendNode(position);
+        Position &positioncurrent = positionList.appendNode(position);
 
         Status status(readUntilComma(player_input));
-        statusList.appendNode(status);
+        Status &statuscurrent = statusList.appendNode(status);
 
-        Player player(id, name, city, position, status, TeamStatList());
+        Player player(id, &currentname, &currentcity, &positioncurrent, &statuscurrent);
+        std::cout<<player<<std::endl;
     }
 
 
@@ -69,7 +70,7 @@ int main() {
         int assists = charToInt(readUntilComma(team_input));            // Голевые передачи
         TeamStat teamStat(teamname, playedMatches, goalsScored, goalsConceded, assists);
         teamStatList.appendNode(teamStat);
-        std::cout << playerId << " " << teamStat << std::endl;
+        //std::cout << playerId << " " << teamStat << std::endl;
         //Player player = playerList.findById(playerId);
         //player.teamStatList.appendNode(timeStat);
     }

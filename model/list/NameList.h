@@ -20,7 +20,7 @@ struct NameList {
     ~NameList();
 
     // Добавление узла в конец списка
-    void appendNode(const Name value);
+    Name &appendNode(const Name &value);
 
     // Вывод StringList в поток
     friend std::ostream &operator<<(std::ostream &os, const NameList &node);

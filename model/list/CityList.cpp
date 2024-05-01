@@ -23,13 +23,13 @@ CityList::~CityList() {
 }
 
 // Добавление узла в конец списка
-void CityList::appendNode(const City value) {
+City& CityList::appendNode(const City value) {
     // Проверяем, существует ли уже такое значение в списке
     CityNode *current = head;
     while (current != nullptr) {
         if (current->data == value) {
             // Значение уже присутствует в списке, поэтому выходим из функции
-            return;
+            return current->data;
         }
         current = current->next;
     }
@@ -46,6 +46,7 @@ void CityList::appendNode(const City value) {
         tail->next = newNode;
         tail = newNode;
     }
+    return newNode->data;
 }
 
 // Оператор вывода узла в поток

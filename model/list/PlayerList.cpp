@@ -24,7 +24,7 @@ PlayerList::~PlayerList() {
 }
 
 // Добавление узла в конец списка
-/*void PlayerList::appendNode(const Player value) {
+void PlayerList::appendNode(const Player value) {
 
     // Проверяем, существует ли уже такое значение в списке
     PlayerNode *current = head;
@@ -48,8 +48,9 @@ PlayerList::~PlayerList() {
         tail->next = newNode;
         tail = newNode;
     }
-}*/
-Player* findById(const PlayerList& playerList, int playerId) {
+}
+/*
+Player *findById(const PlayerList& playerList, int playerId) {
     PlayerNode* currentNode = playerList.head; // Начинаем с головы списка
     while (currentNode != nullptr) {
         if (currentNode->data.idPlayer == playerId) {
@@ -58,15 +59,15 @@ Player* findById(const PlayerList& playerList, int playerId) {
         currentNode = currentNode->next; // Переходим к следующему узлу
     }
     return nullptr; // Если игрок с указанным идентификатором не найден, возвращаем nullptr
-}
+}*/
+
 // Оператор вывода узла в поток
-/*std::ostream &operator<<(std::ostream &os, const PlayerList &list) {
+std::ostream &operator<<(std::ostream &os, const PlayerList &list) {
     PlayerNode *current = list.head;
     while (current != nullptr) {
         os << current->data << " -> ";
         current = current->next;
     }
-    os << "NULL";
     return os;
-}*/
+}
 

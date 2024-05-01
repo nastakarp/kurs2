@@ -19,7 +19,7 @@ struct TeamStatList {
     ~TeamStatList();
 
     // Добавление узла в конец списка
-    void appendNode(const TeamStat value);
+    TeamStat &appendNode(const TeamStat value);
 
     // Оператор вывода узла в поток
     friend std::ostream &operator<<(std::ostream &os, const TeamStatList &list);

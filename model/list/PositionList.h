@@ -19,7 +19,7 @@ struct PositionList {
     ~PositionList();
 
     // Добавление узла в конец списка
-    void appendNode(const Position value);
+    Position &appendNode(const Position value);
 
     // Оператор вывода узла в поток
     friend std::ostream &operator<<(std::ostream &os, const PositionList &list);

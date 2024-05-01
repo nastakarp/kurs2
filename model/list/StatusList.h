@@ -19,7 +19,7 @@ struct StatusList {
     ~StatusList();
 
     // Добавление узла в конец списка
-    void appendNode(const Status value);
+    Status& appendNode(const Status value);
 
     // Оператор вывода узла в поток
     friend std::ostream &operator<<(std::ostream &os, const StatusList &list);

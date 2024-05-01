@@ -24,13 +24,13 @@ TeamStatList::~TeamStatList() {
 }
 
 // Добавление узла в конец списка
-void TeamStatList::appendNode(const TeamStat value) {
+TeamStat& TeamStatList::appendNode(const TeamStat value) {
     // Проверяем, существует ли уже такое значение в списке
     TeamStatNode *current = head;
     while (current != nullptr) {
         if (current->data == value) {
             // Значение уже присутствует в списке, поэтому выходим из функции
-            return;
+            return current->data;
         }
         current = current->next;
     }
@@ -46,6 +46,7 @@ void TeamStatList::appendNode(const TeamStat value) {
         tail->next = newNode;
         tail = newNode;
     }
+    return newNode->data;
 }
 
 // Оператор вывода узла в поток

@@ -1,10 +1,12 @@
 #include <iostream>
 #include <fstream>
+
 #include "model/core/Name.h"
 #include "model/core/City.h"
 #include "model/core/Position.h"
 #include "model/core/Status.h"
 #include "model/core/TeamName.h"
+
 #include "model/list/NameList.h"
 #include "model/list/CityList.h"
 #include "model/list/PositionList.h"
@@ -25,19 +27,21 @@ int main() {
     StatusList statusList;
     TeamNameList teamNameList;
 
-    //функция для перевода id в int, добавить все в списки
     while (!input.eof()) {
-        std::cout << readUntilComma(input) << " ";
-        NameList Name(readUntilComma(input));
+        int id = charToInt(readUntilComma(input));
+        Name name(readUntilComma(input), readUntilComma(input));
         nameList.appendNode(name);
-        CityList city(readUntilComma(input));
+
+        City city(readUntilComma(input));
         cityList.appendNode(city);
+
         Position position(readUntilComma(input));
         positionList.appendNode(position);
-        StatusList status(readUntilComma(input));
+
+        Status status(readUntilComma(input));
         statusList.appendNode(status);
-        std::cout << std::endl;
     }
+
     std::cout << nameList.head->data;
     std::cout << cityList.head->data;
     std::cout << positionList.head->data;

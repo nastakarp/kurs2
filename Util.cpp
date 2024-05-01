@@ -59,3 +59,17 @@ char *readUntilComma(std::ifstream &input) {
     buffer[index] = '\0'; // Добавляем завершающий нулевой символ
     return buffer;
 }
+
+int charToInt(const char *str) {
+    int result = 0;
+    int sign = 1;
+    int i = 0;
+
+    // Преобразование каждого символа в цифру и добавление к результату
+    while (str[i] != '\0') {
+        result = result * 10 + (str[i] - '0');
+        i++;
+    }
+
+    return sign * result;
+}

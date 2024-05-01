@@ -11,14 +11,13 @@ NameNode::~NameNode() {
 // Оператор сравнения равенства NameNode
 bool operator==(const NameNode &lhs, const NameNode &rhs) {
     // Сравниваем данные имен
-    return lhs.data.lastName == rhs.data.lastName &&
-           lhs.data.firstName == rhs.data.firstName &&
-           lhs.data.patronymic == rhs.data.patronymic;
+    return lhs.data.fullname == rhs.data.fullname &&
+           lhs.data.dateOfBirth == rhs.data.dateOfBirth;
 
 }
 
 // Вывод узла в поток
 std::ostream &operator<<(std::ostream &os, const NameNode &node) {
-    os << node.data.lastName << " " << node.data.firstName << " " << node.data.patronymic;
+    os << node.data.fullname<< " " << node.data.dateOfBirth;
     return os;
 }

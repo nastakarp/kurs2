@@ -29,6 +29,7 @@ int main() {
     StatusList statusList;
     PlayerList playerList;
 
+
     while (!input.eof()) {
         int id = charToInt(readUntilComma(input));
 

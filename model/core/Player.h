@@ -9,14 +9,16 @@
 #include "City.h"
 #include "Position.h"
 #include "Status.h"
+#include "../list/TeamStatList.h"
 
 struct Player{
-    int id;
+    Player(int id, const Name &playerName, const City &playerCity, Position playerPosition, Status playerStatus,
+           TeamStatList list);
+
+    int idPlayer;
     Name name;
     City city;
     Position position;
     Status status;
-
-    //TeamStatList;
 };
 #endif //PROGA_KURS_PLAYER_H

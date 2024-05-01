@@ -17,10 +17,11 @@
 
 int main() {
     setlocale(LC_ALL, "Russian");
-    ifstream input("player.txt", std::ios::in);
-    if (!input.is_open()) {
+    ifstream player_input("player.txt", std::ios::in);
+    if (!player_input.is_open()) {
         std::cerr << "Failed to open the file." << std::endl;
         return 1;
+
     }
 
     NameList nameList;
@@ -30,50 +31,57 @@ int main() {
     PlayerList playerList;
 
 
-    while (!input.eof()) {
-        int id = charToInt(readUntilComma(input));
+    while (!player_input.eof()) {
+        int id = charToInt(readUntilComma(player_input));
 
-        char *fullname = readUntilComma(input);
-        char *dob = readUntilComma(input);
+        char *fullname = readUntilComma(player_input);
+        char *dob = readUntilComma(player_input);
         //std::cout<<fullname<<" " <<dob<<std::endl;
         Name name(fullname, dob);
         nameList.appendNode(name);
 
-        City city(readUntilComma(input));
+        City city(readUntilComma(player_input));
         cityList.appendNode(city);
 
-        Position position(readUntilComma(input));
+        Position position(readUntilComma(player_input));
         positionList.appendNode(position);
 
-        Status status(readUntilComma(input));
+        Status status(readUntilComma(player_input));
         statusList.appendNode(status);
 
-        Player player(id, name, city, position, status, TeamStatList() );
+        Player player(id, name, city, position, status, TeamStatList());
     }
 
 
-    ifstream team("team.txt", std::ios::in);
-    if (!team.is_open()) {
+    ifstream team_input("team.txt", std::ios::in);
+    if (!team_input.is_open()) {
         std::cerr << "Failed to open the file." << std::endl;
         return 1;
     }
 
-    while (!team.eof()){
-        int playerId;
-        char* teamname =readUntilComma(team);
-        int a = charToInt(readUntilComma(team));
-        //TeamName teamName(teamname,a,b,c,d);
+    TeamStatList teamStatList;
+    while (!team_input.eof()) {
+        int playerId = charToInt(readUntilComma(team_input));
+        char *teamname = readUntilComma(team_input);
+        int playedMatches = charToInt(readUntilComma(team_input));      // Сыгранные матчи
+        int goalsScored = charToInt(readUntilComma(team_input));        // Забитые голы
+        int goalsConceded = charToInt(readUntilComma(team_input));      // Пропущенные голы
+        int assists = charToInt(readUntilComma(team_input));            // Голевые передачи
+        TeamStat teamStat(teamname, playedMatches, goalsScored, goalsConceded, assists);
+        teamStatList.appendNode(teamStat);
+        std::cout << playerId << " " << teamStat << std::endl;
         //Player player = playerList.findById(playerId);
-        //player.teamNameList.appendNode(timeName)
+        //player.teamStatList.appendNode(timeStat);
     }
+
     /*
     std::cout << nameList.head->data << std::endl;
     std::cout << cityList.head->data << std::endl;
     std::cout << positionList.head->data << std::endl;
     std::cout << statusList.head->data << std::endl;*/
 
-    input.close();
-
+    player_input.close();
+    team_input.close();
     return 0;
 }
 

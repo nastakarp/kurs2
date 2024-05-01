@@ -23,10 +23,10 @@ add_executable(proga_kurs
         model/core/Status.h
         model/node/StatusNode.cpp
         model/node/StatusNode.h
-        model/core/TeamName.cpp
-        model/core/TeamName.h
-        model/node/TeamNameNode.cpp
-        model/node/TeamNameNode.h
+        model/core/TeamStat.cpp
+        model/core/TeamStat.h
+        model/node/TeamStatNode.cpp
+        model/node/TeamStatNode.h
         model/list/NameList.h
         model/list/NameList.cpp
         model/list/CityList.h
@@ -35,5 +35,11 @@ add_executable(proga_kurs
         model/list/PositionList.h
         model/list/StatusList.cpp
         model/list/StatusList.h
-        model/list/TeamNameList.cpp
-        model/list/TeamNameList.h)
+        model/list/TeamStatList.cpp
+        model/list/TeamStatList.h
+        model/core/Player.cpp
+        model/core/Player.h
+        model/list/PlayerList.cpp
+        model/list/PlayerList.h
+        model/node/PlayerNode.cpp
+        model/node/PlayerNode.h)

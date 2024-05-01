@@ -1,23 +1,23 @@
 //
 // Created by Анастасия on 21.04.2024.
 //
-#include "TeamNameNode.h"
+#include "TeamStatNode.h"
 
 // Конструктор для инициализации узла с заданным значением и указателем на следующий узел
-TeamNameNode::TeamNameNode(const TeamName value) : data(value), next(nullptr) {}
+TeamStatNode::TeamStatNode(const TeamStat value) : data(value), next(nullptr) {}
 
 // Деструктор для освобождения ресурсов
-TeamNameNode::~TeamNameNode() {
+TeamStatNode::~TeamStatNode() {
 }
 
 // Оператор сравнения равенства NameNode
-bool operator==(const TeamNameNode &lhs, const TeamNameNode &rhs) {
+bool operator==(const TeamStatNode &lhs, const TeamStatNode &rhs) {
     // Сравниваем данные игроков
     return lhs.data.name == rhs.data.name;
 }
 
 // Вывод узла в поток
-std::ostream &operator<<(std::ostream &os, const TeamNameNode &node) {
+std::ostream &operator<<(std::ostream &os, const TeamStatNode &node) {
     os << node.data.name;
     return os;
 }

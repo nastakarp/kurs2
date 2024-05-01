@@ -2,19 +2,19 @@
 // Created by Анастасия on 23.04.2024.
 //
 
-#include "TeamNameList.h"
-#include "../node/TeamNameNode.h"
+#include "TeamStatList.h"
+#include "../node/TeamStatNode.h"
 
-TeamNameList::TeamNameList() : head(nullptr), tail(nullptr) {
+TeamStatList::TeamStatList() : head(nullptr), tail(nullptr) {
 }
 
 
 // Деструктор для освобождения памяти
-TeamNameList::~TeamNameList() {
-    TeamNameNode *current = head; // Указатель на текущий узел
+TeamStatList::~TeamStatList() {
+    TeamStatNode *current = head; // Указатель на текущий узел
 
     while (current != nullptr) {
-        TeamNameNode *next = current->next; // Сохраняем указатель на следующий узел
+        TeamStatNode *next = current->next; // Сохраняем указатель на следующий узел
         delete current; // Освобождаем память для текущего узла
         current = next; // Переходим к следующему узлу
     }
@@ -24,9 +24,9 @@ TeamNameList::~TeamNameList() {
 }
 
 // Добавление узла в конец списка
-void TeamNameList::appendNode(const TeamName value) {
+void TeamStatList::appendNode(const TeamStat value) {
     // Проверяем, существует ли уже такое значение в списке
-    TeamNameNode *current = head;
+    TeamStatNode *current = head;
     while (current != nullptr) {
         if (current->data == value) {
             // Значение уже присутствует в списке, поэтому выходим из функции
@@ -35,7 +35,7 @@ void TeamNameList::appendNode(const TeamName value) {
         current = current->next;
     }
     // Создаем новый узел с заданным значением
-    auto *newNode = new TeamNameNode(value);
+    auto *newNode = new TeamStatNode(value);
 
     // Если список пуст, устанавливаем новый узел как начало и конец списка
     if (head == nullptr) {
@@ -49,8 +49,8 @@ void TeamNameList::appendNode(const TeamName value) {
 }
 
 // Оператор вывода узла в поток
-std::ostream &operator<<(std::ostream &os, const TeamNameList &list) {
-    TeamNameNode *current = list.head;
+std::ostream &operator<<(std::ostream &os, const TeamStatList &list) {
+    TeamStatNode *current = list.head;
     while (current != nullptr) {
         os << current->data << " -> ";
         current = current->next;

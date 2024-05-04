@@ -74,7 +74,7 @@ int main() {
         //Player player = playerList.findById(playerId);
         //player.teamStatList.appendNode(timeStat);
     }
-
+    //переустановка
     /*
     std::cout << nameList.head->data << std::endl;
     std::cout << cityList.head->data << std::endl;

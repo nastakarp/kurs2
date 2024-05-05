@@ -42,4 +42,10 @@ add_executable(proga_kurs
         model/list/PlayerList.cpp
         model/list/PlayerList.h
         model/node/PlayerNode.cpp
-        model/node/PlayerNode.h)
+        model/node/PlayerNode.h
+        model/core/Year.cpp
+        model/core/Year.h
+        model/list/YearList.cpp
+        model/list/YearList.h
+        model/node/YearNode.cpp
+        model/node/YearNode.h)

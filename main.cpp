@@ -14,6 +14,76 @@
 #include "model/list/StatusList.h"
 #include "model/list/PlayerList.h"
 #include "model/list/YearList.h"
+//1 игроков, сгруппированные по позиции и возрастной категории
+// Добавляем заголовочный файл для работы с файлами
+
+#include <iomanip> // Добавляем заголовочный файл для манипуляторов вывода
+
+void printPlayersGroupedByPositionAndAgeCategory(PositionList *positionList, YearList *yearList, PlayerList *playerList) {
+    ofstream outputFile("output1.txt");
+    if (!outputFile.is_open()) {
+        cerr << "Unable to open output file";
+        return;
+    }
+
+    auto positionNode = positionList->head;
+    while (positionNode != nullptr) {
+        outputFile << setw(10) << positionNode->data.position << '\n'; // Выравниваем по символам
+        auto yearNode = yearList->head;
+        while (yearNode != nullptr) {
+            bool flag = false;
+            auto playerNode = playerList->head;
+            while (playerNode != nullptr) {
+
+                if ((extractYear(playerNode->data.name->dateOfBirth) == yearNode->data.value) &&
+                    (*playerNode->data.position == positionNode->data)) {
+                    if (!flag) outputFile << setw(5) << yearNode->data.value ; // Выравниваем по символам
+                    flag = true;
+                    outputFile << setw(40) << (playerNode->data.name->fullname) ; // Выравниваем по символам
+                }
+                playerNode = playerNode->next;
+            }
+            if (flag) outputFile << endl;
+            yearNode = yearNode->next;
+        }
+
+        outputFile << endl;
+        positionNode = positionNode->next;
+    }
+
+    outputFile.close();
+}
+
+
+//2 список игроков и кандидатов, которые играли ранее в одних командах
+
+
+//3 учетные карточки на каждого игрока, упорядоченные (отдельно) по общему числу игр, голов и голевых передач за все команды,
+void kart(PlayerList *playerList) {
+    auto playerNode = playerList->head;
+    while (playerNode != nullptr) {
+        auto teamstatNode = playerNode->data.statList.head;
+        int sumplayedMatches = 0;
+        while (teamstatNode != nullptr) {
+            sumplayedMatches += teamstatNode->data.playedMatches;
+            //остальные голы
+            teamstatNode = teamstatNode->next;
+        }
+        cout << playerNode->data.name->fullname << '\t';
+        cout << sumplayedMatches << '\t';
+        playerNode = playerNode->next;
+        cout << endl;
+    }
+    cout << endl;
+}
+/*
+while (playerNode != nullptr){
+ auto teamstatNode=playernode.teamstat.head
+ пробегаем по игроку
+    пробегаем по teamstat
+        суммируем голы за каждую команду
+ */
+//4 учетные карточки на каждого игрока команды, упорядоченные (отдельно) по общему числу игр, голов и голевых передач за команду
 
 int main() {
     setlocale(LC_ALL, "Russian");
@@ -36,12 +106,12 @@ int main() {
 
         char *fullname = readUntilComma(player_input);
         char *dob = readUntilComma(player_input);
-        //std::cout<<fullname<<" " <<dob<<std::endl;
+
         Name name(fullname, dob);
         Name &currentname = nameList.appendNode(name);
 
         Year year(extractYear(dob));
-        Year currentyear=yearList.appendNode(year.value);
+        Year currentyear = yearList.appendNode(year.value);
 
         City city(readUntilComma(player_input));
         City &currentcity = cityList.appendNode(city);
@@ -56,7 +126,8 @@ int main() {
 
         playerList.appendNode(player);
     }
-    std::cout  << yearList << std::endl;
+    player_input.close();
+    //std::cout  << yearList << std::endl;
     ifstream team_input("team.txt", std::ios::in);
     if (!team_input.is_open()) {
         std::cerr << "Failed to open the file." << std::endl;
@@ -76,8 +147,11 @@ int main() {
             player->statList.appendNode(teamStat);
         }
     }
-    player_input.close();
+
     team_input.close();
+
+    printPlayersGroupedByPositionAndAgeCategory(&positionList, &yearList, &playerList);
+    kart(&playerList);
     return 0;
 }
 

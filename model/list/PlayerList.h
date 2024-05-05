@@ -21,11 +21,10 @@ struct PlayerList {
     // Добавление узла в конец списка
     void appendNode(const Player value);
 
-    // Функция для поиска игрока по идентификатору в списке игроков
-    //Player findById(const PlayerList &playerList, int playerId);
-
-    // Оператор вывода узла в поток
+       // Оператор вывода узла в поток
     friend std::ostream &operator<<(std::ostream &os, const PlayerList &list);
+
+    Player *findById(int playerId) const;
 };
 
 #endif //PROGA_KURS_PLAYERLIST_H

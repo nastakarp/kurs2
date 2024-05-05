@@ -49,9 +49,10 @@ void PlayerList::appendNode(const Player value) {
         tail = newNode;
     }
 }
-/*
-Player *findById(const PlayerList& playerList, int playerId) {
-    PlayerNode* currentNode = playerList.head; // Начинаем с головы списка
+
+Player *PlayerList::findById(int playerId) const {
+    auto currentNode = this->head;
+    // Начинаем с головы списка
     while (currentNode != nullptr) {
         if (currentNode->data.idPlayer == playerId) {
             return &(currentNode->data); // Возвращаем указатель на игрока, если найден
@@ -59,7 +60,7 @@ Player *findById(const PlayerList& playerList, int playerId) {
         currentNode = currentNode->next; // Переходим к следующему узлу
     }
     return nullptr; // Если игрок с указанным идентификатором не найден, возвращаем nullptr
-}*/
+}
 
 // Оператор вывода узла в поток
 std::ostream &operator<<(std::ostream &os, const PlayerList &list) {
@@ -70,4 +71,8 @@ std::ostream &operator<<(std::ostream &os, const PlayerList &list) {
     }
     return os;
 }
+/*
+void task1(output)
+по логике findById
 
+ */

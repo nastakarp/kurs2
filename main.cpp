@@ -12,8 +12,8 @@
 #include "model/list/CityList.h"
 #include "model/list/PositionList.h"
 #include "model/list/StatusList.h"
-#include "model/list/TeamStatList.h"
 #include "model/list/PlayerList.h"
+#include "model/list/YearList.h"
 
 int main() {
     setlocale(LC_ALL, "Russian");
@@ -29,7 +29,7 @@ int main() {
     PositionList positionList;
     StatusList statusList;
     PlayerList playerList;
-
+    YearList yearList;
 
     while (!player_input.eof()) {
         int id = charToInt(readUntilComma(player_input));
@@ -39,6 +39,9 @@ int main() {
         //std::cout<<fullname<<" " <<dob<<std::endl;
         Name name(fullname, dob);
         Name &currentname = nameList.appendNode(name);
+
+        Year year(extractYear(dob));
+        Year currentyear=yearList.appendNode(year.value);
 
         City city(readUntilComma(player_input));
         City &currentcity = cityList.appendNode(city);
@@ -50,17 +53,16 @@ int main() {
         Status &statuscurrent = statusList.appendNode(status);
 
         Player player(id, &currentname, &currentcity, &positioncurrent, &statuscurrent);
-        std::cout<<player<<std::endl;
+
+        playerList.appendNode(player);
     }
-
-
+    std::cout  << yearList << std::endl;
     ifstream team_input("team.txt", std::ios::in);
     if (!team_input.is_open()) {
         std::cerr << "Failed to open the file." << std::endl;
         return 1;
     }
 
-    TeamStatList teamStatList;
     while (!team_input.eof()) {
         int playerId = charToInt(readUntilComma(team_input));
         char *teamname = readUntilComma(team_input);
@@ -69,18 +71,11 @@ int main() {
         int goalsConceded = charToInt(readUntilComma(team_input));      // Пропущенные голы
         int assists = charToInt(readUntilComma(team_input));            // Голевые передачи
         TeamStat teamStat(teamname, playedMatches, goalsScored, goalsConceded, assists);
-        teamStatList.appendNode(teamStat);
-        //std::cout << playerId << " " << teamStat << std::endl;
-        //Player player = playerList.findById(playerId);
-        //player.teamStatList.appendNode(timeStat);
+        Player *player = playerList.findById(playerId);
+        if (player != nullptr) {
+            player->statList.appendNode(teamStat);
+        }
     }
-    //переустановка
-    /*
-    std::cout << nameList.head->data << std::endl;
-    std::cout << cityList.head->data << std::endl;
-    std::cout << positionList.head->data << std::endl;
-    std::cout << statusList.head->data << std::endl;*/
-
     player_input.close();
     team_input.close();
     return 0;

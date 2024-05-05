@@ -48,4 +48,6 @@ add_executable(proga_kurs
         model/list/YearList.cpp
         model/list/YearList.h
         model/node/YearNode.cpp
-        model/node/YearNode.h)
+        model/node/YearNode.h
+        Functional.cpp
+        Functional.h)

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 
+
 #include "model/core/Name.h"
 #include "model/core/City.h"
 #include "model/core/Position.h"
@@ -14,92 +15,16 @@
 #include "model/list/StatusList.h"
 #include "model/list/PlayerList.h"
 #include "model/list/YearList.h"
-//1 игроков, сгруппированные по позиции и возрастной категории
-// Добавляем заголовочный файл для работы с файлами
 
-#include <iomanip> // Добавляем заголовочный файл для манипуляторов вывода
+#include "Functional.h"
 
-void printPlayersGroupedByPositionAndAgeCategory(PositionList *positionList, YearList *yearList, PlayerList *playerList) {
-    ofstream outputFile("output1.txt");
-    if (!outputFile.is_open()) {
-        cerr << "Unable to open output file";
-        return;
-    }
-
-    auto positionNode = positionList->head;
-    while (positionNode != nullptr) {
-        outputFile << setw(10) << positionNode->data.position << '\n'; // Выравниваем по символам
-        auto yearNode = yearList->head;
-        while (yearNode != nullptr) {
-            bool flag = false;
-            auto playerNode = playerList->head;
-            while (playerNode != nullptr) {
-
-                if ((extractYear(playerNode->data.name->dateOfBirth) == yearNode->data.value) &&
-                    (*playerNode->data.position == positionNode->data)) {
-                    if (!flag) outputFile << setw(5) << yearNode->data.value ; // Выравниваем по символам
-                    flag = true;
-                    outputFile << setw(40) << (playerNode->data.name->fullname) ; // Выравниваем по символам
-                }
-                playerNode = playerNode->next;
-            }
-            if (flag) outputFile << endl;
-            yearNode = yearNode->next;
-        }
-
-        outputFile << endl;
-        positionNode = positionNode->next;
-    }
-
-    outputFile.close();
-}
-
-
-//2 список игроков и кандидатов, которые играли ранее в одних командах
-
-
-//3 учетные карточки на каждого игрока, упорядоченные (отдельно) по общему числу игр, голов и голевых передач за все команды,
-void kart(PlayerList *playerList) {
-    auto playerNode = playerList->head;
-    while (playerNode != nullptr) {
-        auto teamstatNode = playerNode->data.statList.head;
-        int sumplayedMatches = 0;
-        while (teamstatNode != nullptr) {
-            sumplayedMatches += teamstatNode->data.playedMatches;
-            //остальные голы
-            teamstatNode = teamstatNode->next;
-        }
-        cout << playerNode->data.name->fullname << '\t';
-        cout << sumplayedMatches << '\t';
-        playerNode = playerNode->next;
-        cout << endl;
-    }
-    cout << endl;
-}
-/*
-while (playerNode != nullptr){
- auto teamstatNode=playernode.teamstat.head
- пробегаем по игроку
-    пробегаем по teamstat
-        суммируем голы за каждую команду
- */
-//4 учетные карточки на каждого игрока команды, упорядоченные (отдельно) по общему числу игр, голов и голевых передач за команду
-
-int main() {
-    setlocale(LC_ALL, "Russian");
-    ifstream player_input("player.txt", std::ios::in);
+void readPlayerData(const char *filename, NameList &nameList, CityList &cityList, PositionList &positionList,
+                    StatusList &statusList, PlayerList &playerList, YearList &yearList) {
+    std::ifstream player_input(filename, std::ios::in);
     if (!player_input.is_open()) {
         std::cerr << "Failed to open the file." << std::endl;
-        return 1;
-
+        return;
     }
-
-    NameList nameList;
-    CityList cityList;
-    PositionList positionList;
-    StatusList statusList;
-    PlayerList playerList;
-    YearList yearList;
 
     while (!player_input.eof()) {
         int id = charToInt(readUntilComma(player_input));
@@ -111,7 +36,7 @@ int main() {
         Name &currentname = nameList.appendNode(name);
 
         Year year(extractYear(dob));
-        Year currentyear = yearList.appendNode(year.value);
+        Year &currentyear = yearList.appendNode(year.value);
 
         City city(readUntilComma(player_input));
         City &currentcity = cityList.appendNode(city);
@@ -127,11 +52,13 @@ int main() {
         playerList.appendNode(player);
     }
     player_input.close();
-    //std::cout  << yearList << std::endl;
-    ifstream team_input("team.txt", std::ios::in);
+}
+
+void readTeamData(const std::string &filename, PlayerList &playerList) {
+    std::ifstream team_input(filename);
     if (!team_input.is_open()) {
         std::cerr << "Failed to open the file." << std::endl;
-        return 1;
+        return;
     }
 
     while (!team_input.eof()) {
@@ -149,9 +76,63 @@ int main() {
     }
 
     team_input.close();
+}
 
-    printPlayersGroupedByPositionAndAgeCategory(&positionList, &yearList, &playerList);
-    kart(&playerList);
+int main() {
+    NameList nameList;
+    CityList cityList;
+    PositionList positionList;
+    StatusList statusList;
+    PlayerList playerList;
+    YearList yearList;
+
+    // Чтение данных о игроках
+    readPlayerData("player.txt", nameList, cityList, positionList, statusList, playerList, yearList);
+
+    // Чтение данных о командах
+    readTeamData("team.txt", playerList);
+
+    int choice;
+    bool exitMenu = false;
+
+    while (!exitMenu) {
+        // Выводим меню
+        std::cout << "Select a function:" << std::endl;
+        std::cout << "1. list of players grouped by position and age category" << std::endl;
+        std::cout << "2. list of players and candidates who have previously played in the same teams" << std::endl;
+        std::cout
+                << "3. scorecards for each player, ordered (separately) by the total number of games, goals and assists for all teams"
+                << std::endl;
+        std::cout
+                << "4. registration cards for each player of the team, ordered (separately) by the total number of games, goals and assists for the team"
+                << std::endl;
+        std::cout << "5. exit" << std::endl;
+        std::cout << "Your choice: ";
+        std::cin >> choice;
+
+        // Обрабатываем выбор пользователя
+        switch (choice) {
+            case 1:
+                printPlayersGroupedByPositionAndAgeCategory(&positionList, &yearList, &playerList);
+                break;
+            case 2:
+                std::cout << "2 in working" << std::endl;
+                break;
+            case 3:
+                printPlayerCards(&playerList);
+                break;
+            case 4:
+                std::cout << "4 in working" << std::endl;
+                break;
+            case 5:
+                exitMenu = true;
+                break;
+            default:
+                std::cout << "Wrong choice. Try again" << std::endl;
+                break;
+        }
+    }
+
     return 0;
 }
 

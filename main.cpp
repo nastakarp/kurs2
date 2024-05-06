@@ -8,6 +8,7 @@
 #include "model/core/Status.h"
 #include "model/core/TeamStat.h"
 #include "model/core/Player.h"
+#include "model/core/TeamName.h"
 
 #include "model/list/NameList.h"
 #include "model/list/CityList.h"
@@ -15,8 +16,10 @@
 #include "model/list/StatusList.h"
 #include "model/list/PlayerList.h"
 #include "model/list/YearList.h"
+#include "model/list/TeamNameList.h"
 
 #include "Functional.h"
+
 
 void readPlayerData(const char *filename, NameList &nameList, CityList &cityList, PositionList &positionList,
                     StatusList &statusList, PlayerList &playerList, YearList &yearList) {
@@ -54,7 +57,7 @@ void readPlayerData(const char *filename, NameList &nameList, CityList &cityList
     player_input.close();
 }
 
-void readTeamData(const std::string &filename, PlayerList &playerList) {
+void readTeamData(const std::string &filename, PlayerList &playerList, TeamNameList &teamNameList) {
     std::ifstream team_input(filename);
     if (!team_input.is_open()) {
         std::cerr << "Failed to open the file." << std::endl;
@@ -68,13 +71,26 @@ void readTeamData(const std::string &filename, PlayerList &playerList) {
         int goalsScored = charToInt(readUntilComma(team_input));        // Забитые голы
         int goalsConceded = charToInt(readUntilComma(team_input));      // Пропущенные голы
         int assists = charToInt(readUntilComma(team_input));            // Голевые передачи
+
+        // Создаем объект TeamName
+        //TeamName teamName(teamname)
+        //АЧЕ АКАК
+        // Добавляем команду в список
+        TeamName teamName = teamNameList.appendNode(teamName);
+
+        // Выводим имя добавленной команды
+        std::cout << teamNameList << std::endl;
+        // Создаем объект TeamStat
         TeamStat teamStat(teamname, playedMatches, goalsScored, goalsConceded, assists);
+
+        // Находим игрока по ID
         Player *player = playerList.findById(playerId);
+
+        // Если игрок найден, добавляем статистику команды в его список статистики
         if (player != nullptr) {
             player->statList.appendNode(teamStat);
         }
     }
-
     team_input.close();
 }
 
@@ -85,12 +101,14 @@ int main() {
     StatusList statusList;
     PlayerList playerList;
     YearList yearList;
+    TeamNameList teamNameList;
 
     // Чтение данных о игроках
     readPlayerData("player.txt", nameList, cityList, positionList, statusList, playerList, yearList);
 
     // Чтение данных о командах
-    readTeamData("team.txt", playerList);
+    readTeamData("team.txt", playerList, teamNameList);
+
 
     int choice;
     bool exitMenu = false;

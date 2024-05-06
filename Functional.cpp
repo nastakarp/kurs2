@@ -6,7 +6,6 @@
 #include <iomanip>
 
 //1 игроков, сгруппированные по позиции и возрастной категории
-// Добавляем заголовочный файл для работы с файлами
 void
 printPlayersGroupedByPositionAndAgeCategory(PositionList *positionList, YearList *yearList, PlayerList *playerList) {
     std::ofstream outputFile("output1.txt");
@@ -55,16 +54,13 @@ printPlayersGroupedByPositionAndAgeCategory(PositionList *positionList, YearList
 }
 
 //2 список игроков и кандидатов, которые играли ранее в одних командах
-/*void printFormerTeammates(PlayerList& playerList) {
+void printFormerTeammates(PlayerList& playerList) {
     // Проходим по всем игрокам
     auto currentPlayerNode = playerList.head;
     while (currentPlayerNode != nullptr) {
         Player& currentPlayer = currentPlayerNode->data;
         std::cout << "Player: " << currentPlayer.name->fullname << std::endl;
         std::cout << "Former Teammates:" << std::endl;
-
-        // Создаем список, чтобы избежать дубликатов
-        std::set<Player*> formerTeammates;
 
         // Проходим по всем статистикам команд текущего игрока
         auto currentTeamStatNode = currentPlayer.statList.head;
@@ -73,14 +69,18 @@ printPlayersGroupedByPositionAndAgeCategory(PositionList *positionList, YearList
 
             // Проходим по всем игрокам в текущей команде
             auto otherPlayerNode = playerList.head;
+            bool printedAnyTeammate = false; // Флаг для отслеживания, был ли выведен хотя бы один бывший партнер
             while (otherPlayerNode != nullptr) {
                 Player& otherPlayer = otherPlayerNode->data;
 
                 // Проверяем, не является ли другой игрок текущим игроком
                 if (&otherPlayer != &currentPlayer) {
-                    // Проверяем, есть ли у другого игрока статистика в текущей команде и добавляем его в список
+                    // Проверяем, есть ли у другого игрока статистика в текущей команде и выводим его
                     if (otherPlayer.statList.findById(currentTeamStat.id) != nullptr) {
-                        formerTeammates.insert(&otherPlayer);
+                        if (!printedAnyTeammate) {
+                            std::cout << "- " << otherPlayer.name->fullname << std::endl;
+                            printedAnyTeammate = true;
+                        }
                     }
                 }
 
@@ -90,16 +90,16 @@ printPlayersGroupedByPositionAndAgeCategory(PositionList *positionList, YearList
             currentTeamStatNode = currentTeamStatNode->next;
         }
 
-        // Выводим всех бывших партнеров по команде
-        for (auto teammate : formerTeammates) {
-            std::cout << "- " << teammate->name->fullname << std::endl;
+        if (!printedAnyTeammate) {
+            std::cout << "- None" << std::endl; // Если не было выведено ни одного бывшего партнера, выводим "None"
         }
 
         std::cout << std::endl;
 
         currentPlayerNode = currentPlayerNode->next;
     }
-}*/
+}
+
 
 
 //3 учетные карточки на каждого игрока, упорядоченные (отдельно) по общему числу игр, голов и голевых передач за все команды,
@@ -154,3 +154,90 @@ while (playerNode != nullptr){
 
 //4 учетные карточки на каждого игрока команды, упорядоченные (отдельно) по общему числу игр, голов и голевых передач за команду
 //void printTeamPlayerCards(PlayerList& playerList, teamName)
+void sortByPlayedMatches(PlayerList& teamPlayers) {
+    if (teamPlayers.head == nullptr) return;
+
+    PlayerNode *i, *j;
+    Player temp;
+
+    for (i = teamPlayers.head; i->next != nullptr; i = i->next) {
+        for (j = i->next; j != nullptr; j = j->next) {
+            if (i->data.totalPlayedMatches() < j->data.totalPlayedMatches()) {
+                temp = i->data;
+                i->data = j->data;
+                j->data = temp;
+            }
+        }
+    }
+}
+
+void sortByGoalsScored(PlayerList& teamPlayers) {
+    if (teamPlayers.head == nullptr) return;
+
+    PlayerNode *i, *j;
+    Player temp;
+
+    for (i = teamPlayers.head; i->next != nullptr; i = i->next) {
+        for (j = i->next; j != nullptr; j = j->next) {
+            if (i->data.totalGoalsScored() < j->data.totalGoalsScored()) {
+                temp = i->data;
+                i->data = j->data;
+                j->data = temp;
+            }
+        }
+    }
+}
+
+void sortByAssists(PlayerList& teamPlayers) {
+    if (teamPlayers.head == nullptr) return;
+
+    PlayerNode *i, *j;
+    Player temp;
+
+    for (i = teamPlayers.head; i->next != nullptr; i = i->next) {
+        for (j = i->next; j != nullptr; j = j->next) {
+            if (i->data.totalAssists() < j->data.totalAssists()) {
+                temp = i->data;
+                i->data = j->data;
+                j->data = temp;
+            }
+        }
+    }
+}
+
+void printTeamPlayerCards(PlayerList& playerList, const TeamName& teamName) {
+    // Создаем временный список игроков команды
+    PlayerList teamPlayers;
+
+    // Проходим по всем игрокам
+    auto currentPlayerNode = playerList.head;
+    while (currentPlayerNode != nullptr) {
+        Player& currentPlayer = currentPlayerNode->data;
+
+        // Проверяем, принадлежит ли текущий игрок указанной команде
+        if (*(currentPlayer.teamName) == teamName) {
+            // Если да, добавляем его во временный список
+            teamPlayers.appendNode(currentPlayer);
+        }
+
+        currentPlayerNode = currentPlayerNode->next;
+    }
+
+    // Сортируем игроков по общему числу игр, голов и голевых передач за команду
+    sortByPlayedMatches(teamPlayers);
+    sortByGoalsScored(teamPlayers);
+    sortByAssists(teamPlayers);
+
+    // Выводим учетные карточки для каждого игрока в отсортированном списке
+    auto currentPlayerInTeamNode = teamPlayers.head;
+    while (currentPlayerInTeamNode != nullptr) {
+        Player& currentPlayerInTeam = currentPlayerInTeamNode->data;
+        std::cout << "Player: " << currentPlayerInTeam.name->fullname << std::endl;
+        std::cout << "Total Played Matches: " << currentPlayerInTeam.totalPlayedMatches() << std::endl;
+        std::cout << "Total Goals Scored: " << currentPlayerInTeam.totalGoalsScored() << std::endl;
+        std::cout << "Total Assists: " << currentPlayerInTeam.totalAssists() << std::endl;
+        std::cout << std::endl;
+
+        currentPlayerInTeamNode = currentPlayerInTeamNode->next;
+    }
+}

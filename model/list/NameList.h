@@ -20,10 +20,11 @@ struct NameList {
     ~NameList();
 
     // Добавление узла в конец списка
-    Name &appendNode(const Name &value);
 
     // Вывод StringList в поток
     friend std::ostream &operator<<(std::ostream &os, const NameList &node);
+
+    NameNode *appendNode(Name *value);
 };
 
 #endif //PROGA_KURS_NAMELIST_H

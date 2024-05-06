@@ -1,17 +1,9 @@
 #include "Player.h"
 
-#include "Player.h"
-
 Player::Player(int id, Name* playerName, City* playerCity, Position* playerPosition, Status* playerStatus)
         : idPlayer(id), name(playerName), city(playerCity), position(playerPosition), status(playerStatus) {}
 
-Player::~Player() {
-    // Освобождаем ресурсы, если это необходимо
-    delete name;
-    delete city;
-    delete position;
-    delete status;
-}
+Player::~Player() = default;
 
 std::ostream &operator<<(std::ostream &os, const Player &player) {
     os << player.idPlayer << " ";

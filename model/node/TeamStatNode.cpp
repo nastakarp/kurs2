@@ -7,17 +7,16 @@
 TeamStatNode::TeamStatNode(const TeamStat value) : data(value), next(nullptr) {}
 
 // Деструктор для освобождения ресурсов
-TeamStatNode::~TeamStatNode() {
-}
+TeamStatNode::~TeamStatNode() = default;
 
 // Оператор сравнения равенства NameNode
 bool operator==(const TeamStatNode &lhs, const TeamStatNode &rhs) {
     // Сравниваем данные игроков
-    return lhs.data.name == rhs.data.name;
+    return lhs.data.team == rhs.data.team;
 }
 
 // Вывод узла в поток
 std::ostream &operator<<(std::ostream &os, const TeamStatNode &node) {
-    os << node.data.name;
+    os << node.data.team;
     return os;
 }

@@ -6,13 +6,13 @@
 #define PROGA_KURS_STATUSNODE_H
 
 #include <iostream>
-#include "../core/Status.h" // Подключаем заголовочный файл для структуры City, если необходимо
+#include "../core/Status.h" // Подключаем заголовочный файл для структуры Team, если необходимо
 
 struct StatusNode {
-    Status data; // Данные узла
+    Status *data; // Данные узла
     StatusNode *next; // Указатель на следующий узел
     // Конструктор для инициализации узла с заданным значением и указателем на следующий узел
-    StatusNode(const Status value);
+    StatusNode(Status *value);
 
     // Деструктор для освобождения ресурсов
     ~StatusNode();

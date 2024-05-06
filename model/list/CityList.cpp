@@ -20,20 +20,20 @@ CityList::~CityList() {
     head = nullptr; // Устанавливаем указатель на начало списка в nullptr
     tail = nullptr; // Устанавливаем указатель на конец списка в nullptr
 }
-
 // Добавление узла в конец списка
-City& CityList::appendNode(const City value) {
+CityNode * CityList::appendNode(City* value) {
+
     // Проверяем, существует ли уже такое значение в списке
     CityNode *current = head;
     while (current != nullptr) {
-        if (current->data == value) {
-            // Значение уже присутствует в списке, поэтому выходим из функции
-            return current->data;
+        if (*(current->data) == *value) {
+            // Значение уже присутствует в списке, поэтому возвращаем указатель на текущий узел
+            return current;
         }
         current = current->next;
     }
 
-    // Создаем новый узел с заданным значением
+    // Создаем новый узел с заданными данными
     auto *newNode = new CityNode(value);
 
     // Если список пуст, устанавливаем новый узел как начало и конец списка
@@ -45,7 +45,9 @@ City& CityList::appendNode(const City value) {
         tail->next = newNode;
         tail = newNode;
     }
-    return newNode->data;
+
+    // Возвращаем указатель на только что добавленный узел
+    return newNode;
 }
 
 // Оператор вывода узла в поток

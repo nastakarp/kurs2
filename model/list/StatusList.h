@@ -18,11 +18,10 @@ struct StatusList {
     // Деструктор для освобождения памяти
     ~StatusList();
 
-    // Добавление узла в конец списка
-    Status& appendNode(const Status value);
-
     // Оператор вывода узла в поток
     friend std::ostream &operator<<(std::ostream &os, const StatusList &list);
+
+    StatusNode *appendNode(Status *value);
 };
 
 #endif //PROGA_KURS_STATUSLIST_H

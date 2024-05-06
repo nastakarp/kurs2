@@ -12,7 +12,7 @@ struct City {
     char *city;
 
     // Конструктор
-    City(const char *cityName);
+    explicit City(const char *cityName);
 
     // Деструктор
     ~City();

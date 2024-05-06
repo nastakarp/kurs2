@@ -24,14 +24,14 @@ PositionList::~PositionList() {
 }
 
 // Добавление узла в конец списка
-Position& PositionList::appendNode(const Position value) {
+PositionNode* PositionList::appendNode(Position *value) {
 
     // Проверяем, существует ли уже такое значение в списке
     PositionNode *current = head;
     while (current != nullptr) {
-        if (current->data == value) {
+        if (*(current->data) == *value) {
             // Значение уже присутствует в списке, поэтому выходим из функции
-            return current->data;
+            return current;
         }
         current = current->next;
     }
@@ -48,7 +48,7 @@ Position& PositionList::appendNode(const Position value) {
         tail->next = newNode;
         tail = newNode;
     }
-    return newNode->data;
+    return newNode;
 }
 
 // Оператор вывода узла в поток

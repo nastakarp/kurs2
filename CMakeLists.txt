@@ -49,11 +49,10 @@ add_executable(proga_kurs
         model/list/YearList.h
         model/node/YearNode.cpp
         model/node/YearNode.h
-        Functional.cpp
-        Functional.h
-        model/core/TeamName.cpp
-        model/core/TeamName.h
-        model/list/TeamNameList.cpp
-        model/list/TeamNameList.h
-        model/node/TeamNameNode.cpp
-        model/node/TeamNameNode.h)
+        model/core/Team.cpp
+        model/core/Team.h
+        model/node/TeamNode.cpp
+        model/node/TeamNode.h
+        model/list/TeamList.cpp
+        model/list/TeamList.h
+)

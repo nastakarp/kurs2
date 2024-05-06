@@ -18,11 +18,10 @@ struct PositionList {
     // Деструктор для освобождения памяти
     ~PositionList();
 
-    // Добавление узла в конец списка
-    Position &appendNode(const Position value);
-
     // Оператор вывода узла в поток
     friend std::ostream &operator<<(std::ostream &os, const PositionList &list);
+
+    PositionNode *appendNode(Position *value);
 };
 
 #endif //PROGA_KURS_POSITIONLIST_H

@@ -6,13 +6,13 @@
 #define PROGA_KURS_CITYNODE_H
 
 #include <iostream>
-#include "../core/City.h" // Подключаем заголовочный файл для структуры City, если необходимо
+#include "../core/City.h" // Подключаем заголовочный файл для структуры Team, если необходимо
 
 struct CityNode {
-    City data; // Данные узла
+    City *data; // Данные узла
     CityNode *next; // Указатель на следующий узел
     // Конструктор для инициализации узла с заданным значением и указателем на следующий узел
-    CityNode(const City value);
+    CityNode(City* value);
 
     // Деструктор для освобождения ресурсов
     ~CityNode();

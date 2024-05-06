@@ -5,11 +5,11 @@
 #include "../core/Name.h"
 
 struct NameNode {
-    Name data;
+    Name *data;
     NameNode *next; // Указатель на следующий узел
 
     // Конструктор для инициализации узла с заданным именем и указателем на следующий узел
-    explicit NameNode(const Name value); // Исправлено с Player на Name
+    NameNode(Name *value);
 
     // Деструктор для освобождения ресурсов
     ~NameNode();
@@ -17,8 +17,8 @@ struct NameNode {
     // Оператор сравнения равенства NameNode
     friend bool operator==(const NameNode &lhs, const NameNode &rhs);
 
-    // Вывод узла в поток
     friend std::ostream &operator<<(std::ostream &os, const NameNode &node);
 };
+
 
 #endif // PROGA_KURS_NAMENODE_H

@@ -1,14 +1,12 @@
 #include <iostream>
 #include <fstream>
 
-
 #include "model/core/Name.h"
 #include "model/core/City.h"
 #include "model/core/Position.h"
 #include "model/core/Status.h"
 #include "model/core/TeamStat.h"
 #include "model/core/Player.h"
-#include "model/core/TeamName.h"
 
 #include "model/list/NameList.h"
 #include "model/list/CityList.h"
@@ -16,143 +14,92 @@
 #include "model/list/StatusList.h"
 #include "model/list/PlayerList.h"
 #include "model/list/YearList.h"
-#include "model/list/TeamNameList.h"
-
-#include "Functional.h"
-
-
-void readPlayerData(const char *filename, NameList &nameList, CityList &cityList, PositionList &positionList,
-                    StatusList &statusList, PlayerList &playerList, YearList &yearList) {
-    std::ifstream player_input(filename, std::ios::in);
-    if (!player_input.is_open()) {
-        std::cerr << "Failed to open the file." << std::endl;
-        return;
-    }
-
-    while (!player_input.eof()) {
-        int id = charToInt(readUntilComma(player_input));
-
-        char *fullname = readUntilComma(player_input);
-        char *dob = readUntilComma(player_input);
-
-        Name name(fullname, dob);
-        Name &currentname = nameList.appendNode(name);
-
-        Year year(extractYear(dob));
-        Year &currentyear = yearList.appendNode(year.value);
-
-        City city(readUntilComma(player_input));
-        City &currentcity = cityList.appendNode(city);
-
-        Position position(readUntilComma(player_input));
-        Position &positioncurrent = positionList.appendNode(position);
-
-        Status status(readUntilComma(player_input));
-        Status &statuscurrent = statusList.appendNode(status);
-
-        Player player(id, &currentname, &currentcity, &positioncurrent, &statuscurrent);
-
-        playerList.appendNode(player);
-    }
-    player_input.close();
-}
-
-void readTeamData(const std::string &filename, PlayerList &playerList, TeamNameList &teamNameList) {
-    std::ifstream team_input(filename);
-    if (!team_input.is_open()) {
-        std::cerr << "Failed to open the file." << std::endl;
-        return;
-    }
-
-    while (!team_input.eof()) {
-        int playerId = charToInt(readUntilComma(team_input));
-        char *teamname = readUntilComma(team_input);
-        int playedMatches = charToInt(readUntilComma(team_input));      // Сыгранные матчи
-        int goalsScored = charToInt(readUntilComma(team_input));        // Забитые голы
-        int goalsConceded = charToInt(readUntilComma(team_input));      // Пропущенные голы
-        int assists = charToInt(readUntilComma(team_input));            // Голевые передачи
-
-        // Создаем объект TeamName
-        //TeamName teamName(teamname)
-        //АЧЕ АКАК
-        // Добавляем команду в список
-        TeamName teamName = teamNameList.appendNode(teamName);
-
-        // Выводим имя добавленной команды
-        std::cout << teamNameList << std::endl;
-        // Создаем объект TeamStat
-        TeamStat teamStat(teamname, playedMatches, goalsScored, goalsConceded, assists);
-
-        // Находим игрока по ID
-        Player *player = playerList.findById(playerId);
-
-        // Если игрок найден, добавляем статистику команды в его список статистики
-        if (player != nullptr) {
-            player->statList.appendNode(teamStat);
-        }
-    }
-    team_input.close();
-}
 
 int main() {
+    setlocale(LC_ALL, "Russian");
+    ifstream player_input("player.txt", std::ios::in);
+    if (!player_input.is_open()) {
+        std::cerr << "Failed to open the file." << std::endl;
+        return 1;
+
+    }
+
     NameList nameList;
     CityList cityList;
     PositionList positionList;
     StatusList statusList;
     PlayerList playerList;
     YearList yearList;
-    TeamNameList teamNameList;
 
-    // Чтение данных о игроках
-    readPlayerData("player.txt", nameList, cityList, positionList, statusList, playerList, yearList);
+    while (!player_input.eof()) {
+        int id = charToInt(readUntilComma(player_input));
+        //std::cout<<id<<std::endl;
+        char *fullname = readUntilComma(player_input);
+        char *dob = readUntilComma(player_input);
+        //std::cout<<fullname<<" " <<dob<<std::endl;
 
-    // Чтение данных о командах
-    readTeamData("team.txt", playerList, teamNameList);
+        Name name(fullname, dob);
+        auto namePtr = nameList.appendNode(&name); // Вызываем метод и получаем указатель на добавленный узел
+        //std::cout<<*namePtr->data<<std::endl;
 
+        //Year year(extractYear(dob));
+        yearList.appendNode(extractYear(dob)) ;
 
-    int choice;
-    bool exitMenu = false;
+        City city(readUntilComma(player_input));
+        auto cityPtr=cityList.appendNode(&city);
+        //std::cout<<*cityPtr->data <<std::endl;
 
-    while (!exitMenu) {
-        // Выводим меню
-        std::cout << "Select a function:" << std::endl;
-        std::cout << "1. list of players grouped by position and age category" << std::endl;
-        std::cout << "2. list of players and candidates who have previously played in the same teams" << std::endl;
-        std::cout
-                << "3. scorecards for each player, ordered (separately) by the total number of games, goals and assists for all teams"
-                << std::endl;
-        std::cout
-                << "4. registration cards for each player of the team, ordered (separately) by the total number of games, goals and assists for the team"
-                << std::endl;
-        std::cout << "5. exit" << std::endl;
-        std::cout << "Your choice: ";
-        std::cin >> choice;
+        Position position(readUntilComma(player_input));
+        auto positionPtr=positionList.appendNode(&position);
+        //std::cout<<*positionPtr->data<<std::endl;
 
-        // Обрабатываем выбор пользователя
-        switch (choice) {
-            case 1:
-                printPlayersGroupedByPositionAndAgeCategory(&positionList, &yearList, &playerList);
-                break;
-            case 2:
-                std::cout << "2 in working" << std::endl;
-                break;
-            case 3:
-                printPlayerCards(&playerList);
-                break;
-            case 4:
-                std::cout << "4 in working" << std::endl;
-                break;
-            case 5:
-                exitMenu = true;
-                break;
-            default:
-                std::cout << "Wrong choice. Try again" << std::endl;
-                break;
-        }
+        Status status(readUntilComma(player_input));
+        auto statusPtr=statusList.appendNode(&status);
+        //std::cout<<*statusPtr->data<<std::endl;
+
+        Player player = Player(
+                id,
+                namePtr->data,
+                cityPtr->data,
+                positionPtr->data,
+                statusPtr->data
+        );
+        playerList.appendNode(player);
     }
+    //cout<<playerList;
+    //cout<<yearList;
+    auto currentNode = playerList.head;
+    // Начинаем с головы списка
+    while (currentNode != nullptr) {
+        cout<<currentNode->data<<endl;
+        currentNode = currentNode->next; // Переходим к следующему узлу
+    }
+
+    ifstream team_input("team.txt", std::ios::in);
+    if (!team_input.is_open()) {
+        std::cerr << "Failed to open the file." << std::endl;
+        return 1;
+    }
+    while (!team_input.eof()) {
+        int playerId = charToInt(readUntilComma(team_input));
+        char *teamname = readUntilComma(team_input);
+        Team team(teamname);
+        //std::cout<<team<<std::endl;
+        int playedMatches = charToInt(readUntilComma(team_input));      // Сыгранные матчи
+        int goalsScored = charToInt(readUntilComma(team_input));        // Забитые голы
+        int goalsConceded = charToInt(readUntilComma(team_input));      // Пропущенные голы
+        int assists = charToInt(readUntilComma(team_input));            // Голевые передачи
+        TeamStat teamStat(&team, playedMatches, goalsScored, goalsConceded, assists);
+        //cout<<teamStat<<endl;
+        Player *player = playerList.findById(playerId);
+        if (player != nullptr) {
+            player->statList.appendNode(teamStat);
+        }
+        //cout<<*player<<endl;
+    }
+
+    player_input.close();
+    team_input.close();
 
     return 0;
 }
-
-
-

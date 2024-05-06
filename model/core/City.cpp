@@ -8,8 +8,8 @@
 // Определение конструктора
 City::City(const char *cityName) {
     int len = length(cityName);
-    city = new char[len + 1];
-    copy(cityName, city, len);
+    this->city = new char[len + 1];
+    copy(cityName, this->city, len);
 }
 
 // Определение деструктора

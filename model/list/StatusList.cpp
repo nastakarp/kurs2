@@ -23,12 +23,12 @@ StatusList::~StatusList() {
 }
 
 // Добавление узла в конец списка
-Status& StatusList::appendNode(const Status value) {
+StatusNode* StatusList::appendNode(Status *value) {
     StatusNode *current = head;
     while (current != nullptr) {
-        if (current->data == value) {
+        if (*(current->data) == *value) {
             // Значение уже присутствует в списке, поэтому выходим из функции
-            return current->data;
+            return current;
         }
         current = current->next;
     }
@@ -44,7 +44,7 @@ Status& StatusList::appendNode(const Status value) {
         tail->next = newNode;
         tail = newNode;
     }
-    return newNode->data;
+    return newNode;
 }
 
 // Оператор вывода узла в поток

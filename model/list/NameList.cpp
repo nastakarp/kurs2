@@ -7,7 +7,6 @@
 NameList::NameList() : head(nullptr), tail(nullptr) {
 }
 
-
 // Деструктор для освобождения памяти
 NameList::~NameList() {
     NameNode *current = head; // Указатель на текущий узел
@@ -22,19 +21,18 @@ NameList::~NameList() {
     tail = nullptr; // Устанавливаем указатель на конец списка в nullptr
 }
 
-// Добавление узла в конец списка
-Name& NameList::appendNode(const Name& value) {
+NameNode* NameList::appendNode(Name* value) {
     // Проверяем, существует ли уже такое значение в списке
     NameNode *current = head;
     while (current != nullptr) {
-        if (current->data == value) {
-            // Значение уже присутствует в списке, поэтому возвращаем ссылку на data
-            return current->data;
+        if (*(current->data) == *value) {
+            // Значение уже присутствует в списке, поэтому возвращаем указатель на текущий узел
+            return current;
         }
         current = current->next;
     }
 
-    // Создаем новый узел с заданным значением
+    // Создаем новый узел с заданными данными
     auto *newNode = new NameNode(value);
 
     // Если список пуст, устанавливаем новый узел как начало и конец списка
@@ -47,11 +45,9 @@ Name& NameList::appendNode(const Name& value) {
         tail = newNode;
     }
 
-    // Возвращаем ссылку на data нового узла
-    return newNode->data;
+    // Возвращаем указатель на только что добавленный узел
+    return newNode;
 }
-
-
 
 // Оператор вывода узла в поток
 std::ostream &operator<<(std::ostream &os, const NameList &list) {

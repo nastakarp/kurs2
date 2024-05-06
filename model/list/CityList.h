@@ -18,11 +18,10 @@ struct CityList {
     // Деструктор для освобождения памяти
     ~CityList();
 
-    // Добавление узла в конец списка
-    City &appendNode(const City value);
-
     // Оператор вывода узла в поток
     friend std::ostream &operator<<(std::ostream &os, const CityList &list);
+
+    CityNode * appendNode(City *value);
 };
 
 #endif //PROGA_KURS_CITYLIST_H

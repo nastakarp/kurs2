@@ -10,11 +10,11 @@
 #include "../core/Position.h"
 
 struct PositionNode {
-    Position data; // Исправлено на Position
+    Position *data; // Исправлено на Position
     PositionNode *next; // Указатель на следующий узел
 
     // Конструктор для инициализации узла с заданным значением и указателем на следующий узел
-    explicit PositionNode(const Position value);
+    PositionNode(Position *value);
 
     // Деструктор для освобождения ресурсов
     ~PositionNode();

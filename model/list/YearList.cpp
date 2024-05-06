@@ -19,12 +19,12 @@ YearList::~YearList() {
     head = nullptr;
     tail = nullptr;
 }
-Year& YearList::appendNode(const int yearValue) {
+void YearList::appendNode(const int yearValue) {
     // Проверяем, существует ли уже такое значение в списке
     YearNode *current = head;
     while (current != nullptr) {
         if (current->data.value == yearValue) {
-            return current->data; // Если значение уже есть в списке, возвращаем его
+            return ; // Если значение уже есть в списке, возвращаем его
         }
         current = current->next;
     }
@@ -39,7 +39,7 @@ Year& YearList::appendNode(const int yearValue) {
         if (tail == nullptr) {
             tail = newNode;
         }
-        return newNode->data;
+        return ;
     }
 
     // Ищем место для вставки нового узла
@@ -57,7 +57,7 @@ Year& YearList::appendNode(const int yearValue) {
         tail = newNode;
     }
 
-    return newNode->data;
+    return ;
 }
 
 

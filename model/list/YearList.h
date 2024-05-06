@@ -16,7 +16,7 @@ struct YearList {
     ~YearList(); // Деструктор
 
     friend std::ostream &operator<<(std::ostream &os, const YearList &list); // Оператор вывода узла в поток
-    Year &appendNode(const int yearValue);
+    void appendNode(const int yearValue);
 };
 
 #endif //PROGA_KURS_YEARLIST_H

@@ -71,8 +71,3 @@ std::ostream &operator<<(std::ostream &os, const PlayerList &list) {
     }
     return os;
 }
-/*
-void task1(output)
-по логике findById
-
- */

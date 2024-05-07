@@ -18,13 +18,11 @@ struct PlayerList {
     // Деструктор для освобождения памяти
     ~PlayerList();
 
-    // Добавление узла в конец списка
-    void appendNode(const Player value);
-
-       // Оператор вывода узла в поток
+    // Оператор вывода узла в поток
     friend std::ostream &operator<<(std::ostream &os, const PlayerList &list);
 
     Player *findById(int playerId) const;
+    Player & appendNode(Player *value);
 };
 
 #endif //PROGA_KURS_PLAYERLIST_H

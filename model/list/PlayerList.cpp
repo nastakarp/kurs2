@@ -22,20 +22,16 @@ PlayerList::~PlayerList() {
     head = nullptr; // Устанавливаем указатель на начало списка в nullptr
     tail = nullptr; // Устанавливаем указатель на конец списка в nullptr
 }
-
-// Добавление узла в конец списка
-void PlayerList::appendNode(const Player value) {
-
+Player & PlayerList::appendNode(Player *value) {
     // Проверяем, существует ли уже такое значение в списке
     PlayerNode *current = head;
     while (current != nullptr) {
         if (current->data == value) {
             // Значение уже присутствует в списке, поэтому выходим из функции
-            return;
+            return *current->data;
         }
         current = current->next;
     }
-
     // Создаем новый узел с заданным значением
     auto *newNode = new PlayerNode(value);
 
@@ -48,14 +44,16 @@ void PlayerList::appendNode(const Player value) {
         tail->next = newNode;
         tail = newNode;
     }
+    return *newNode->data;
 }
+
 
 Player *PlayerList::findById(int playerId) const {
     auto currentNode = this->head;
     // Начинаем с головы списка
     while (currentNode != nullptr) {
-        if (currentNode->data.idPlayer == playerId) {
-            return &(currentNode->data); // Возвращаем указатель на игрока, если найден
+        if (currentNode->data->idPlayer == playerId) {
+            return currentNode->data; // Возвращаем указатель на игрока, если найден
         }
         currentNode = currentNode->next; // Переходим к следующему узлу
     }

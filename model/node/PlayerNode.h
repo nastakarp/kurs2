@@ -9,11 +9,11 @@
 #include "../core/Player.h"
 
 struct PlayerNode {
-    Player data; // Исправлено на Position
+    Player *data; // Исправлено на Position
     PlayerNode *next; // Указатель на следующий узел
 
     // Конструктор для инициализации узла с заданным значением и указателем на следующий узел
-    explicit PlayerNode(const Player value);
+    PlayerNode(Player *value);
 
     // Деструктор для освобождения ресурсов
     ~PlayerNode();

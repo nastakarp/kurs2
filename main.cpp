@@ -64,16 +64,19 @@ int main() {
                 positionPtr->data,
                 statusPtr->data
         );
-        playerList.appendNode(player);
+        playerList.appendNode(&player);
+        //cout<<player<<endl;
     }
     //cout<<playerList;
     //cout<<yearList;
     auto currentNode = playerList.head;
     // Начинаем с головы списка
     while (currentNode != nullptr) {
-        cout<<currentNode->data<<endl;
+        cout << *(currentNode->data) << endl;
         currentNode = currentNode->next; // Переходим к следующему узлу
     }
+
+
 
     ifstream team_input("team.txt", std::ios::in);
     if (!team_input.is_open()) {
